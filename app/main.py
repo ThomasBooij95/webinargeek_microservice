@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-from app.list_broadcasts import fetch_broadcast_json_webinargeek
+from .list_broadcasts import fetch_broadcast_json_webinargeek
 import json
 
 app = FastAPI()
