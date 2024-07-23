@@ -28,3 +28,5 @@ run:
 start-network:
 	docker network create traefik-public
 
+local:
+	uvicorn app.main:app --port 0
