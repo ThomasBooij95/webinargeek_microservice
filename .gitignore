@@ -5,3 +5,4 @@ __pycache__
 .vscode
 login.txt
 .env
+docker-compose.override.yml
