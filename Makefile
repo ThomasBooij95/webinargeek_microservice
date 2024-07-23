@@ -30,3 +30,13 @@ start-network:
 
 local:
 	uvicorn app.main:app --port 0
+
+
+kill-all:
+	docker kill $(docker ps -q)
+
+traefik-up:
+	docker compose -f docker-compose.traefik.yml up -d
+
+service-up:
+	docker compose -f docker-compose.yml up -d
