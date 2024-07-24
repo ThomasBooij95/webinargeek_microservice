@@ -10,7 +10,6 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-@app.get("/")
-def read_main():
-    data = fetch_broadcast_json_webinargeek()
-    return data
+@app.get("/list_broadcasts")
+def list_future_broadcasts():
+    return fetch_broadcast_json_webinargeek()
