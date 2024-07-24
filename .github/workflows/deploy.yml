@@ -2,10 +2,10 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - main
+      - main develop
   pull_request:
     branches:
-      - main
+      - main develop
 jobs:
   lint:
     runs-on: ubuntu-latest
