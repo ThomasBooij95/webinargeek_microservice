@@ -10,6 +10,6 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-@app.get("/list_broadcasts")
+@app.get("/list_broadcasts_maria_me_gusta")
 def list_available_broadcasts():
     return fetch_broadcast_json_webinargeek()
