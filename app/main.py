@@ -1,7 +1,5 @@
 from fastapi import FastAPI
 
-import json
-
 from lib.list_broadcasts import fetch_broadcast_json_webinargeek
 
 app = FastAPI()
