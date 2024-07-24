@@ -43,3 +43,6 @@ service-up:
 
 deploy:
 	./deploy.sh
+
+lint:
+	flake8 . 
