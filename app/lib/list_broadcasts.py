@@ -22,5 +22,5 @@ def fetch_broadcast_json_webinargeek():
     # Paginate through the results
     json_data = requests.get(url, headers=headers, params=params).json()["broadcasts"]
     # Filter the data where "isEnded" is False
-    broad_cast_options = [entry for entry in json_data if entry["has_ended"] == False]
+    broad_cast_options = [entry for entry in json_data if not entry["has_ended"]]
     return broad_cast_options

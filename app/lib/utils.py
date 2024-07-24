@@ -21,6 +21,6 @@ def UNIX_timestamp_to_datetime(unix_timestamp, time_zone="UTC"):
         datetime_utc = datetime_from_stamp.astimezone(pytz.utc)
         return datetime_utc
 
-    except (ValueError, TypeError) as e:
+    except (ValueError, TypeError):
         # print(f"Invalid timestamp ({e}), returning None")
         return None
