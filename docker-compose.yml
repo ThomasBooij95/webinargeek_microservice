@@ -1,6 +1,7 @@
 services:
 
   backend:
+    # image: thomasbooij/api_proxy_microservice:latest
     build: ./
     restart: always
     labels:
