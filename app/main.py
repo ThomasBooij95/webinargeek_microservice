@@ -8,6 +8,6 @@ load_dotenv()
 
 
 # add a comment
-@app.get("/list_broadcasts_maria_me_gusta")
+@app.get("/list_broadcasts")
 def list_available_broadcasts():
     return fetch_broadcast_json_webinargeek()
