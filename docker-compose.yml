@@ -1,7 +1,8 @@
 services:
 
   backend:
-    build: ./
+    image: thomasbooij/api_proxy_microservice:latest
+    # build: ./
     restart: always
     labels:
       # Enable Traefik for this specific "backend" service
