@@ -50,6 +50,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
+      - uses: actions/checkout@v1
       - name: Push to server
         uses: appleboy/ssh-action@master
         with:
@@ -61,3 +62,15 @@ jobs:
             git pull
             docker compose down
             docker compose up -d --build
+# jobs:
+#   test_ssh:
+#     runs-on: [ubuntu-latest]
+#     steps:
+#       - uses: actions/checkout@v1
+#       - name: Push to server
+#         uses: appleboy/ssh-action@master
+#         with:
+#           host: ${{ secrets.VPS_HOST }}
+#           username: ${{ secrets.VPS_USER_GITHUB }}
+#           password: ${{ secrets.VPS_PASSWORD_GITHUB }}
+#           script: echo "Hello World"
