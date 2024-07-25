@@ -49,17 +49,12 @@ jobs:
     needs: build
     steps:
       - name: Deploy to VPS
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.VPS_HOST }}
-        username: ${{ secrets.VPS_USER }}
-        key: ${{ secrets.VPS_KEY }}
-        script: |
-          docker pull ${{ secrets.DOCKER_USERNAME }}/api_proxy_microservice:latest
-          cd ~/code/webinargeek_microservice
-          docker-compose up -d --build
-
-
-
-V
-:q!
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_KEY }}
+          script: |
+            docker pull ${{ secrets.DOCKER_USERNAME }}/api_proxy_microservice:latest
+            cd ~/code/webinargeek_microservice
+            docker-compose up -d --build
