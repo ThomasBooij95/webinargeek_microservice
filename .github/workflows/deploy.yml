@@ -3,11 +3,9 @@ on:
   push:
     branches:
       - main
-      - develop
   pull_request:
     branches:
       - main
-      - develop
 jobs:
   lint:
     runs-on: ubuntu-latest
@@ -52,12 +50,12 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - name: Deploy to VPS
+      - name: Push to server
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USER }}
-          key: ${{ secrets.VPS_KEY }}
+          username: ${{ secrets.VPS_USER_GITHUB }}
+          password: ${{ secrets.VPS_PASSWORD_GITHUB }}
           script: |
             cd ~/code/webinargeek_microservice
             git pull
