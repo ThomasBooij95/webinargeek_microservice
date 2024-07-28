@@ -2,6 +2,7 @@ from redis.asyncio import Redis
 from fastapi_cache import FastAPICache
 from fastapi_cache.decorator import cache
 from contextlib import asynccontextmanager
+from app.docs.utils import get_description
 from app.lib.types import BroadcastResponse
 from fastapi import FastAPI, Response, Request
 from fastapi_cache.backends.redis import RedisBackend
@@ -16,65 +17,9 @@ async def lifespan(app: FastAPI):
     await redis.close()
 
 
-description = """
-# Welcome to the WebinarGeek API Documentation
-
-Welcome to the API documentation for WebinarGeek's broadcast listing service, powered by FastAPI. This API allows you to fetch information about available broadcasts efficiently, leveraging the power of caching for optimized performance.
-
-## Key Features
-
-- **Fast and Modern**: Built with FastAPI, one of the fastest Python frameworks, ensuring high performance and low latency.
-- **Flexible Endpoints**: Retrieve broadcast data using optional query parameters, making it easy to get the information you need.
-- **Efficient Caching**: Utilizes caching to reduce load times and improve user experience by storing responses for 15 minutes.
-
-## Getting Started
-
-Our API is designed to be straightforward and intuitive. Here’s a brief overview to get you started:
-
-### Base URL
-
-The base URL for accessing the API is:
-stresslessdogs.booijanalytics.nl/
-
-### Endpoints
-
-#### List Available Broadcasts
-
-Fetches information about available broadcasts. You can optionally specify a `webinar_id` to get data for a specific webinar.
-
-- **URL**: `/list_broadcasts/`
-- **Method**: `GET`
-- **Query Parameters**:
-  - `webinar_id` (optional, integer): The ID of the webinar to fetch broadcasts for.
-
-##### Example Requests
-
-1. **Fetch all broadcasts**:
-GET /list_broadcasts/
-
-
-2. **Fetch broadcasts for a specific webinar**:
-GET /list_broadcasts/?webinar_id=123
-
-
-
-##### Response
-
-The response will be a JSON object containing the broadcast data. If a `webinar_id` is provided, the data will pertain to that specific webinar. Otherwise, it will return default broadcast data.
-
-```json
-{
-"data": "Broadcast data",
-"webinar_id": 123  // if applicable
-}
-
-
-
-
-"""
 app = FastAPI(
-    title="ChimichangApp",
-    description=description,
+    title="Booij Analytics WebinarGeek proxy",
+    description=get_description(),
     summary="Microservice for fetching broadcasts and subscribing users.",
     version="1.0.1",
     terms_of_service="https://www.booijanalytics.nl/",

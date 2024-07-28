@@ -1,6 +1,10 @@
 services:
 
   traefik:
+    environment:
+      - USERNAME=Thomas
+      - PASSWORD=asdhfjkl123hlkasd
+      - HASHED_PASSWORD=$apr1$nSKKu/Ng$uG4MVePIAIoXNu2BUE7t2.
     # Use the latest v2.3.x Traefik image available
     image: traefik:v2.3
     ports:
@@ -63,6 +67,7 @@ services:
       - --log
       # Enable the Dashboard and API
       - --api
+    env_file: "traefik.env"
     networks:
       # Use the public network created to be shared between Traefik and
       # any other service that needs to be publicly available with HTTPS

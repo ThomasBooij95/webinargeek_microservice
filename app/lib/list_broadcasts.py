@@ -1,7 +1,6 @@
 import os
 import pytz
 import requests
-from pydantic import HttpUrl
 from app.lib.types import BroadcastResponse
 from app.lib.utils import UNIX_timestamp_to_datetime
 

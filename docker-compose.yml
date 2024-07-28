@@ -1,14 +1,39 @@
 services:
-  app:
+
+  backend:
+    # image: prod_service
     build: .
-    container_name: scratch
-    command: python -m debugpy  --listen 0.0.0.0:5678 -m uvicorn app.main:app --port 80 --host 0.0.0.0  --log-level  debug --reload
-    # command: uvicorn app.main:app --port 80 --host 0.0.0.0  --log-level  debug --reload
-    ports:
-      - 8080:80
-      - 5678:5678
-    volumes:
-      - .:/app
+    restart: always
+    environment:
+      - USERNAME=Thomas
+      - PASSWORD=asdhfjkl123hlkasd
+      - HASHED_PASSWORD=$apr1$nSKKu/Ng$uG4MVePIAIoXNu2BUE7t2.
+    labels:
+      # Enable Traefik for this specific "backend" service
+      - traefik.enable=true
+      # Define the port inside of the Docker service to use
+      - traefik.http.services.app.loadbalancer.server.port=80
+      # Make Traefik use this domain in HTTP
+      - traefik.http.routers.app-http.entrypoints=http
+      - traefik.http.routers.app-http.rule=Host(`stresslessdogs.booijanalytics.nl`)
+      # Use the traefik-public network (declared below)
+      - traefik.docker.network=traefik-public
+      # Make Traefik use this domain in HTTPS
+      - traefik.http.routers.app-https.entrypoints=https
+      - traefik.http.routers.app-https.rule=Host(`stresslessdogs.booijanalytics.nl`)
+      - traefik.http.routers.app-https.tls=true
+      # Use the "le" (Let's Encrypt) resolver
+      - traefik.http.routers.app-https.tls.certresolver=le
+      # https-redirect middleware to redirect HTTP to HTTPS
+      - traefik.http.middlewares.https-redirect.redirectscheme.scheme=https
+      - traefik.http.middlewares.https-redirect.redirectscheme.permanent=true
+      # Middleware to redirect HTTP to HTTPS
+      - traefik.http.routers.app-http.middlewares=https-redirect
+      - traefik.http.routers.app-https.middlewares=admin-auth
+    networks:
+      # Use the public network created to be shared between Traefik and
+      # any other service that needs to be publicly available with HTTPS
+      - traefik-public
     env_file: "app/.env"
     depends_on:
       - redis
@@ -16,3 +41,6 @@ services:
     image: "redis:latest"
     ports:
       - "6379:6379"
+networks:
+  traefik-public:
+    external: true

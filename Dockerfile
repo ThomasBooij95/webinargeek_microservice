@@ -1,5 +1,5 @@
 # Use the official image as a parent image
-FROM python:latest
+FROM tiangolo/uvicorn-gunicorn-fastapi:python3.8
 
 # Set the working directory in the container
 WORKDIR /app
@@ -14,9 +14,7 @@ COPY pyproject.toml poetry.lock /app/
 RUN poetry export -f requirements.txt --output requirements.txt --without-hashes
 
 # Install the dependencies using pip
-RUN pip install --no-cache-dir --upgrade -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the rest of the application code into the container
 COPY . ./app/
-
-CMD ["uvicorn","app.app.main:app","--port", "80","--host","0.0.0.0" ,"--log-level", "debug"]
