@@ -17,4 +17,4 @@ RUN poetry export -f requirements.txt --output requirements.txt --without-hashes
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the rest of the application code into the container
-COPY . ./app/
+COPY ./app /app/
