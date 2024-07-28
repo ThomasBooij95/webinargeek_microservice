@@ -1,8 +1,10 @@
-import datetime as dt
 import pytz
+import datetime as dt
 
 
-def UNIX_timestamp_to_datetime(unix_timestamp, time_zone="UTC"):
+def UNIX_timestamp_to_datetime(
+    unix_timestamp: float, time_zone: str = "UTC"
+) -> dt.datetime:
     """
     Convert a Unix timestamp to a Python datetime object with UTC timezone.
 
@@ -23,4 +25,4 @@ def UNIX_timestamp_to_datetime(unix_timestamp, time_zone="UTC"):
 
     except (ValueError, TypeError):
         # print(f"Invalid timestamp ({e}), returning None")
-        return None
+        return None  # type: ignore
